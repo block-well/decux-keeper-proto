@@ -1,0 +1,21 @@
+syntax = "proto3";
+package message;
+
+import "google/protobuf/timestamp.proto";
+
+message Opration {
+  int32 id = 1;
+  uint64 nonce = 2;
+  bytes pubKey = 3;
+  bytes signature = 4;
+
+  google.protobuf.Timestamp timestamp = 9;
+
+  oneof opration {
+    Heartbeat heartbeat = 10;
+  }
+}
+
+message Heartbeat {
+  bytes payload = 1;
+}
