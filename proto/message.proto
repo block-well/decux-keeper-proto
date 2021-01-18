@@ -3,7 +3,7 @@ package message;
 
 import "google/protobuf/timestamp.proto";
 
-message Opration {
+message Operation {
   int32 id = 1;
   uint64 nonce = 2;
   bytes pubKey = 3;
@@ -11,7 +11,7 @@ message Opration {
 
   google.protobuf.Timestamp timestamp = 9;
 
-  oneof opration {
+  oneof operation {
     Heartbeat heartbeat = 10;
   }
 }
