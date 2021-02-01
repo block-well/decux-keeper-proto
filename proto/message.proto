@@ -43,8 +43,9 @@ message Withdraws {
 
 message Group {
   int32 id = 1;
-  repeated int32 keepers = 2;
-  google.protobuf.Timestamp createdAt = 3;
+  string address = 2;
+  repeated int32 keepers = 3;
+  google.protobuf.Timestamp createdAt = 4;
 }
 
 message Groups {
