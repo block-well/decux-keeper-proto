@@ -29,6 +29,7 @@ type Operation struct {
 	Timestamp *timestamp.Timestamp `protobuf:"bytes,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// Types that are valid to be assigned to Operation:
 	//	*Operation_Heartbeat
+	//	*Operation_WithdrawSignature
 	Operation            isOperation_Operation `protobuf_oneof:"operation"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
@@ -103,7 +104,13 @@ type Operation_Heartbeat struct {
 	Heartbeat *Heartbeat `protobuf:"bytes,10,opt,name=heartbeat,proto3,oneof"`
 }
 
+type Operation_WithdrawSignature struct {
+	WithdrawSignature *WithdrawSignature `protobuf:"bytes,11,opt,name=withdrawSignature,proto3,oneof"`
+}
+
 func (*Operation_Heartbeat) isOperation_Operation() {}
+
+func (*Operation_WithdrawSignature) isOperation_Operation() {}
 
 func (m *Operation) GetOperation() isOperation_Operation {
 	if m != nil {
@@ -119,10 +126,18 @@ func (m *Operation) GetHeartbeat() *Heartbeat {
 	return nil
 }
 
+func (m *Operation) GetWithdrawSignature() *WithdrawSignature {
+	if x, ok := m.GetOperation().(*Operation_WithdrawSignature); ok {
+		return x.WithdrawSignature
+	}
+	return nil
+}
+
 // XXX_OneofWrappers is for the internal use of the proto package.
 func (*Operation) XXX_OneofWrappers() []interface{} {
 	return []interface{}{
 		(*Operation_Heartbeat)(nil),
+		(*Operation_WithdrawSignature)(nil),
 	}
 }
 
@@ -165,28 +180,322 @@ func (m *Heartbeat) GetPayload() []byte {
 	return nil
 }
 
+type WithdrawSignature struct {
+	WithdrawId           int32    `protobuf:"varint,1,opt,name=withdrawId,proto3" json:"withdrawId,omitempty"`
+	Signature            []byte   `protobuf:"bytes,2,opt,name=signature,proto3" json:"signature,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *WithdrawSignature) Reset()         { *m = WithdrawSignature{} }
+func (m *WithdrawSignature) String() string { return proto.CompactTextString(m) }
+func (*WithdrawSignature) ProtoMessage()    {}
+func (*WithdrawSignature) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33c57e4bae7b9afd, []int{2}
+}
+
+func (m *WithdrawSignature) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_WithdrawSignature.Unmarshal(m, b)
+}
+func (m *WithdrawSignature) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_WithdrawSignature.Marshal(b, m, deterministic)
+}
+func (m *WithdrawSignature) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_WithdrawSignature.Merge(m, src)
+}
+func (m *WithdrawSignature) XXX_Size() int {
+	return xxx_messageInfo_WithdrawSignature.Size(m)
+}
+func (m *WithdrawSignature) XXX_DiscardUnknown() {
+	xxx_messageInfo_WithdrawSignature.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_WithdrawSignature proto.InternalMessageInfo
+
+func (m *WithdrawSignature) GetWithdrawId() int32 {
+	if m != nil {
+		return m.WithdrawId
+	}
+	return 0
+}
+
+func (m *WithdrawSignature) GetSignature() []byte {
+	if m != nil {
+		return m.Signature
+	}
+	return nil
+}
+
+type Withdraw struct {
+	Id                   int32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	GroupId              int32                `protobuf:"varint,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
+	Recipient            string               `protobuf:"bytes,3,opt,name=recipient,proto3" json:"recipient,omitempty"`
+	Amount               uint64               `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Status               string               `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	PaymentRaw           []byte               `protobuf:"bytes,6,opt,name=paymentRaw,proto3" json:"paymentRaw,omitempty"`
+	CreatedAt            *timestamp.Timestamp `protobuf:"bytes,7,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	ApplyHash            []byte               `protobuf:"bytes,8,opt,name=applyHash,proto3" json:"applyHash,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
+}
+
+func (m *Withdraw) Reset()         { *m = Withdraw{} }
+func (m *Withdraw) String() string { return proto.CompactTextString(m) }
+func (*Withdraw) ProtoMessage()    {}
+func (*Withdraw) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33c57e4bae7b9afd, []int{3}
+}
+
+func (m *Withdraw) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Withdraw.Unmarshal(m, b)
+}
+func (m *Withdraw) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Withdraw.Marshal(b, m, deterministic)
+}
+func (m *Withdraw) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Withdraw.Merge(m, src)
+}
+func (m *Withdraw) XXX_Size() int {
+	return xxx_messageInfo_Withdraw.Size(m)
+}
+func (m *Withdraw) XXX_DiscardUnknown() {
+	xxx_messageInfo_Withdraw.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Withdraw proto.InternalMessageInfo
+
+func (m *Withdraw) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *Withdraw) GetGroupId() int32 {
+	if m != nil {
+		return m.GroupId
+	}
+	return 0
+}
+
+func (m *Withdraw) GetRecipient() string {
+	if m != nil {
+		return m.Recipient
+	}
+	return ""
+}
+
+func (m *Withdraw) GetAmount() uint64 {
+	if m != nil {
+		return m.Amount
+	}
+	return 0
+}
+
+func (m *Withdraw) GetStatus() string {
+	if m != nil {
+		return m.Status
+	}
+	return ""
+}
+
+func (m *Withdraw) GetPaymentRaw() []byte {
+	if m != nil {
+		return m.PaymentRaw
+	}
+	return nil
+}
+
+func (m *Withdraw) GetCreatedAt() *timestamp.Timestamp {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return nil
+}
+
+func (m *Withdraw) GetApplyHash() []byte {
+	if m != nil {
+		return m.ApplyHash
+	}
+	return nil
+}
+
+type Withdraws struct {
+	Data                 []*Withdraw `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *Withdraws) Reset()         { *m = Withdraws{} }
+func (m *Withdraws) String() string { return proto.CompactTextString(m) }
+func (*Withdraws) ProtoMessage()    {}
+func (*Withdraws) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33c57e4bae7b9afd, []int{4}
+}
+
+func (m *Withdraws) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Withdraws.Unmarshal(m, b)
+}
+func (m *Withdraws) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Withdraws.Marshal(b, m, deterministic)
+}
+func (m *Withdraws) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Withdraws.Merge(m, src)
+}
+func (m *Withdraws) XXX_Size() int {
+	return xxx_messageInfo_Withdraws.Size(m)
+}
+func (m *Withdraws) XXX_DiscardUnknown() {
+	xxx_messageInfo_Withdraws.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Withdraws proto.InternalMessageInfo
+
+func (m *Withdraws) GetData() []*Withdraw {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type Group struct {
+	Id                   int32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Keepers              []int32              `protobuf:"varint,2,rep,packed,name=keepers,proto3" json:"keepers,omitempty"`
+	CreatedAt            *timestamp.Timestamp `protobuf:"bytes,3,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
+}
+
+func (m *Group) Reset()         { *m = Group{} }
+func (m *Group) String() string { return proto.CompactTextString(m) }
+func (*Group) ProtoMessage()    {}
+func (*Group) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33c57e4bae7b9afd, []int{5}
+}
+
+func (m *Group) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Group.Unmarshal(m, b)
+}
+func (m *Group) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Group.Marshal(b, m, deterministic)
+}
+func (m *Group) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Group.Merge(m, src)
+}
+func (m *Group) XXX_Size() int {
+	return xxx_messageInfo_Group.Size(m)
+}
+func (m *Group) XXX_DiscardUnknown() {
+	xxx_messageInfo_Group.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Group proto.InternalMessageInfo
+
+func (m *Group) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *Group) GetKeepers() []int32 {
+	if m != nil {
+		return m.Keepers
+	}
+	return nil
+}
+
+func (m *Group) GetCreatedAt() *timestamp.Timestamp {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return nil
+}
+
+type Groups struct {
+	Data                 []*Group `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Groups) Reset()         { *m = Groups{} }
+func (m *Groups) String() string { return proto.CompactTextString(m) }
+func (*Groups) ProtoMessage()    {}
+func (*Groups) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33c57e4bae7b9afd, []int{6}
+}
+
+func (m *Groups) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Groups.Unmarshal(m, b)
+}
+func (m *Groups) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Groups.Marshal(b, m, deterministic)
+}
+func (m *Groups) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Groups.Merge(m, src)
+}
+func (m *Groups) XXX_Size() int {
+	return xxx_messageInfo_Groups.Size(m)
+}
+func (m *Groups) XXX_DiscardUnknown() {
+	xxx_messageInfo_Groups.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Groups proto.InternalMessageInfo
+
+func (m *Groups) GetData() []*Group {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Operation)(nil), "message.Operation")
 	proto.RegisterType((*Heartbeat)(nil), "message.Heartbeat")
+	proto.RegisterType((*WithdrawSignature)(nil), "message.WithdrawSignature")
+	proto.RegisterType((*Withdraw)(nil), "message.Withdraw")
+	proto.RegisterType((*Withdraws)(nil), "message.Withdraws")
+	proto.RegisterType((*Group)(nil), "message.Group")
+	proto.RegisterType((*Groups)(nil), "message.Groups")
 }
 
 func init() { proto.RegisterFile("message.proto", fileDescriptor_33c57e4bae7b9afd) }
 
 var fileDescriptor_33c57e4bae7b9afd = []byte{
-	// 237 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x44, 0x8f, 0xcf, 0x4a, 0xc3, 0x40,
-	0x10, 0xc6, 0xdd, 0xd8, 0x3f, 0xec, 0xb4, 0x7a, 0x18, 0x44, 0x96, 0x22, 0x18, 0x0a, 0x42, 0x4e,
-	0x5b, 0xa8, 0x17, 0xcf, 0x9e, 0x0a, 0x1e, 0x84, 0xc5, 0x17, 0x98, 0xd8, 0x31, 0x2e, 0x34, 0x99,
-	0x25, 0xd9, 0x1c, 0xfa, 0xba, 0x3e, 0x89, 0x90, 0x74, 0x9b, 0xe3, 0x6f, 0xbe, 0xdf, 0xb2, 0xdf,
-	0x07, 0x77, 0x35, 0x77, 0x1d, 0x55, 0x6c, 0x43, 0x2b, 0x51, 0x70, 0x79, 0xc1, 0xcd, 0x73, 0x25,
-	0x52, 0x9d, 0x78, 0x37, 0x9c, 0xcb, 0xfe, 0x67, 0x17, 0x7d, 0xcd, 0x5d, 0xa4, 0x3a, 0x8c, 0xe6,
-	0xf6, 0x4f, 0x81, 0xfe, 0x0c, 0xdc, 0x52, 0xf4, 0xd2, 0xe0, 0x3d, 0x64, 0xfe, 0x68, 0x54, 0xae,
-	0x8a, 0xb9, 0xcb, 0xfc, 0x11, 0x1f, 0x60, 0xde, 0x48, 0xf3, 0xcd, 0x26, 0xcb, 0x55, 0x31, 0x73,
-	0x23, 0xe0, 0x23, 0x2c, 0x42, 0x5f, 0x7e, 0xf0, 0xd9, 0xdc, 0xe6, 0xaa, 0x58, 0xbb, 0x0b, 0xe1,
-	0x13, 0xe8, 0xce, 0x57, 0x0d, 0xc5, 0xbe, 0x65, 0x33, 0x1b, 0xa2, 0xe9, 0x80, 0x6f, 0xa0, 0xaf,
-	0x9f, 0x1b, 0x9d, 0xab, 0x62, 0xb5, 0xdf, 0xd8, 0xb1, 0x9e, 0x4d, 0xf5, 0xec, 0x57, 0x32, 0xdc,
-	0x24, 0xe3, 0x1e, 0xf4, 0x2f, 0x53, 0x1b, 0x4b, 0xa6, 0x68, 0x60, 0x78, 0x89, 0x36, 0x0d, 0x3e,
-	0xa4, 0xe4, 0x70, 0xe3, 0x26, 0xed, 0x7d, 0x05, 0x5a, 0xd2, 0xac, 0xed, 0x0b, 0xe8, 0xab, 0x86,
-	0x06, 0x96, 0x81, 0xce, 0x27, 0xa1, 0x71, 0xe8, 0xda, 0x25, 0x2c, 0x17, 0x43, 0x8d, 0xd7, 0xff,
-	0x00, 0x00, 0x00, 0xff, 0xff, 0xdb, 0x15, 0xa9, 0x66, 0x4d, 0x01, 0x00, 0x00,
+	// 452 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x51, 0x5d, 0x8b, 0xd3, 0x40,
+	0x14, 0xdd, 0xa4, 0x5f, 0x9b, 0xdb, 0x75, 0xa1, 0x83, 0xc8, 0xb0, 0x88, 0x86, 0xc0, 0x42, 0x1e,
+	0x24, 0x0b, 0xf5, 0xc5, 0x57, 0x7d, 0xb1, 0xab, 0x0f, 0xe2, 0x28, 0xf8, 0x7c, 0xdb, 0x5c, 0xd3,
+	0xb0, 0x4d, 0x66, 0x98, 0x99, 0x50, 0xfa, 0xa7, 0xfc, 0x81, 0x3e, 0x49, 0x26, 0x99, 0x74, 0xbb,
+	0x15, 0xc4, 0xc7, 0x73, 0xee, 0xd7, 0xb9, 0xe7, 0xc0, 0xb3, 0x8a, 0x8c, 0xc1, 0x82, 0x32, 0xa5,
+	0xa5, 0x95, 0x6c, 0xd6, 0xc3, 0x9b, 0xd7, 0x85, 0x94, 0xc5, 0x8e, 0xee, 0x1c, 0xbd, 0x6e, 0x7e,
+	0xde, 0xd9, 0xb2, 0x22, 0x63, 0xb1, 0x52, 0x5d, 0x67, 0xf2, 0x2b, 0x84, 0xe8, 0x8b, 0x22, 0x8d,
+	0xb6, 0x94, 0x35, 0xbb, 0x86, 0xb0, 0xcc, 0x79, 0x10, 0x07, 0xe9, 0x44, 0x84, 0x65, 0xce, 0x9e,
+	0xc3, 0xa4, 0x96, 0xf5, 0x86, 0x78, 0x18, 0x07, 0xe9, 0x58, 0x74, 0x80, 0xbd, 0x80, 0xa9, 0x6a,
+	0xd6, 0x9f, 0xe9, 0xc0, 0x47, 0x71, 0x90, 0x5e, 0x89, 0x1e, 0xb1, 0x97, 0x10, 0x99, 0xb2, 0xa8,
+	0xd1, 0x36, 0x9a, 0xf8, 0xd8, 0x95, 0x8e, 0x04, 0x7b, 0x07, 0xd1, 0x70, 0x9c, 0x47, 0x71, 0x90,
+	0xce, 0x97, 0x37, 0x59, 0x27, 0x2f, 0xf3, 0xf2, 0xb2, 0xef, 0xbe, 0x43, 0x1c, 0x9b, 0xd9, 0x12,
+	0xa2, 0x2d, 0xa1, 0xb6, 0x6b, 0x42, 0xcb, 0xc1, 0x4d, 0xb2, 0xcc, 0x3f, 0xbc, 0xf2, 0x95, 0xd5,
+	0x85, 0x38, 0xb6, 0xb1, 0x4f, 0xb0, 0xd8, 0x97, 0x76, 0x9b, 0x6b, 0xdc, 0x7f, 0x1b, 0x34, 0xcd,
+	0xfb, 0xab, 0x7e, 0xf6, 0xc7, 0xd3, 0x8e, 0xd5, 0x85, 0x38, 0x1f, 0xfb, 0x30, 0x87, 0x48, 0x7a,
+	0x8b, 0x92, 0x5b, 0x88, 0x86, 0x93, 0x8c, 0xc3, 0x4c, 0xe1, 0x61, 0x27, 0xb1, 0x33, 0xed, 0x4a,
+	0x78, 0x98, 0x7c, 0x85, 0xc5, 0xd9, 0x76, 0xf6, 0x0a, 0xc0, 0x6f, 0xbf, 0xf7, 0x36, 0x3f, 0x62,
+	0x4e, 0x0d, 0x0c, 0x9f, 0x18, 0x98, 0xfc, 0x0e, 0xe0, 0xd2, 0xef, 0x3c, 0x4b, 0x8a, 0xc3, 0xac,
+	0xd0, 0xb2, 0x51, 0xf7, 0xb9, 0x1b, 0x9c, 0x08, 0x0f, 0xdb, 0xa5, 0x9a, 0x36, 0xa5, 0x2a, 0xa9,
+	0xb6, 0x2e, 0xb0, 0x48, 0x1c, 0x89, 0x36, 0x4b, 0xac, 0x64, 0x53, 0x5b, 0x17, 0xd8, 0x58, 0xf4,
+	0xa8, 0xe5, 0x8d, 0x45, 0xdb, 0x18, 0x3e, 0x71, 0x23, 0x3d, 0x6a, 0x5f, 0x50, 0x78, 0xa8, 0xa8,
+	0xb6, 0x02, 0xf7, 0x7c, 0xea, 0x34, 0x3e, 0x62, 0xda, 0x94, 0x37, 0x9a, 0xd0, 0x52, 0xfe, 0xde,
+	0xf2, 0xd9, 0xbf, 0x53, 0x1e, 0x9a, 0x5b, 0x9d, 0xa8, 0xd4, 0xee, 0xb0, 0x42, 0xb3, 0xe5, 0x97,
+	0xdd, 0xf3, 0x03, 0x91, 0x2c, 0x21, 0xf2, 0xbf, 0x1b, 0x76, 0x0b, 0xe3, 0x1c, 0x2d, 0xf2, 0x20,
+	0x1e, 0xa5, 0xf3, 0xe5, 0xe2, 0x2c, 0x4f, 0xe1, 0xca, 0xc9, 0x03, 0x4c, 0x3e, 0xb6, 0x26, 0xfc,
+	0xcd, 0xac, 0x07, 0x22, 0x45, 0xda, 0xf0, 0x30, 0x1e, 0xb5, 0x66, 0xf5, 0xf0, 0x54, 0xfe, 0xe8,
+	0x3f, 0xe4, 0x27, 0x6f, 0x60, 0xea, 0x8e, 0x19, 0x96, 0x9c, 0xa8, 0xbb, 0x1e, 0xd4, 0xb9, 0x72,
+	0x27, 0x6d, 0x3d, 0x75, 0xcb, 0xde, 0xfe, 0x09, 0x00, 0x00, 0xff, 0xff, 0xab, 0xd9, 0xe7, 0x33,
+	0xb8, 0x03, 0x00, 0x00,
 }

@@ -13,9 +13,40 @@ message Operation {
 
   oneof operation {
     Heartbeat heartbeat = 10;
+    WithdrawSignature withdrawSignature = 11;
   }
 }
 
 message Heartbeat {
   bytes payload = 1;
+}
+
+message WithdrawSignature {
+  int32 withdrawId = 1;
+  bytes signature = 2;
+}
+
+message Withdraw {
+  int32 id = 1;
+  int32 groupId = 2;
+  string recipient = 3;
+  uint64 amount = 4;
+  string status = 5;
+  bytes paymentRaw = 6;
+  google.protobuf.Timestamp createdAt = 7;
+  bytes applyHash = 8;
+}
+
+message Withdraws {
+  repeated Withdraw data = 1;
+}
+
+message Group {
+  int32 id = 1;
+  repeated int32 keepers = 2;
+  google.protobuf.Timestamp createdAt = 3;
+}
+
+message Groups {
+  repeated Group data = 1;
 }
