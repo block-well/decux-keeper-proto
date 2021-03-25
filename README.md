@@ -1,8 +1,7 @@
-decus-keeper-proto
-==================
+# decus-keeper-proto
 
 ## Generate golang code
 
 ```
-protoc -I=./proto --go_out=golang/message/ ./proto/message.proto
+protoc -I=./proto --go_out=./ ./proto/message.proto
 ```
