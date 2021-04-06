@@ -609,179 +609,6 @@ func (x *Withdraw) GetApplyHash() []byte {
 	return nil
 }
 
-type Withdraws struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Data []*Withdraw `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-}
-
-func (x *Withdraws) Reset() {
-	*x = Withdraws{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Withdraws) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Withdraws) ProtoMessage() {}
-
-func (x *Withdraws) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Withdraws.ProtoReflect.Descriptor instead.
-func (*Withdraws) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *Withdraws) GetData() []*Withdraw {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type Group struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id           int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Address      string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	RedeemScript string                 `protobuf:"bytes,3,opt,name=redeemScript,proto3" json:"redeemScript,omitempty"`
-	Keepers      []int32                `protobuf:"varint,4,rep,packed,name=keepers,proto3" json:"keepers,omitempty"`
-	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-}
-
-func (x *Group) Reset() {
-	*x = Group{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Group) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Group) ProtoMessage() {}
-
-func (x *Group) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Group.ProtoReflect.Descriptor instead.
-func (*Group) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *Group) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *Group) GetAddress() string {
-	if x != nil {
-		return x.Address
-	}
-	return ""
-}
-
-func (x *Group) GetRedeemScript() string {
-	if x != nil {
-		return x.RedeemScript
-	}
-	return ""
-}
-
-func (x *Group) GetKeepers() []int32 {
-	if x != nil {
-		return x.Keepers
-	}
-	return nil
-}
-
-func (x *Group) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-type Groups struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Data []*Group `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-}
-
-func (x *Groups) Reset() {
-	*x = Groups{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[9]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Groups) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Groups) ProtoMessage() {}
-
-func (x *Groups) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[9]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Groups.ProtoReflect.Descriptor instead.
-func (*Groups) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *Groups) GetData() []*Group {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
 var File_message_proto protoreflect.FileDescriptor
 
 var file_message_proto_rawDesc = []byte{
@@ -870,25 +697,8 @@ var file_message_proto_rawDesc = []byte{
 	0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72,
 	0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x70, 0x70, 0x6c, 0x79,
 	0x48, 0x61, 0x73, 0x68, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x09, 0x61, 0x70, 0x70, 0x6c,
-	0x79, 0x48, 0x61, 0x73, 0x68, 0x22, 0x32, 0x0a, 0x09, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61,
-	0x77, 0x73, 0x12, 0x25, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
-	0x32, 0x11, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x57, 0x69, 0x74, 0x68, 0x64,
-	0x72, 0x61, 0x77, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xa9, 0x01, 0x0a, 0x05, 0x47, 0x72,
-	0x6f, 0x75, 0x70, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52,
-	0x02, 0x69, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x22, 0x0a,
-	0x0c, 0x72, 0x65, 0x64, 0x65, 0x65, 0x6d, 0x53, 0x63, 0x72, 0x69, 0x70, 0x74, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65, 0x64, 0x65, 0x65, 0x6d, 0x53, 0x63, 0x72, 0x69, 0x70,
-	0x74, 0x12, 0x18, 0x0a, 0x07, 0x6b, 0x65, 0x65, 0x70, 0x65, 0x72, 0x73, 0x18, 0x04, 0x20, 0x03,
-	0x28, 0x05, 0x52, 0x07, 0x6b, 0x65, 0x65, 0x70, 0x65, 0x72, 0x73, 0x12, 0x38, 0x0a, 0x09, 0x63,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a,
-	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
-	0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x2c, 0x0a, 0x06, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x12,
-	0x22, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e,
-	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x04, 0x64,
-	0x61, 0x74, 0x61, 0x42, 0x10, 0x5a, 0x0e, 0x67, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x79, 0x48, 0x61, 0x73, 0x68, 0x42, 0x10, 0x5a, 0x0e, 0x67, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -903,7 +713,7 @@ func file_message_proto_rawDescGZIP() []byte {
 	return file_message_proto_rawDescData
 }
 
-var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_message_proto_goTypes = []interface{}{
 	(*Operation)(nil),             // 0: message.Operation
 	(*Init)(nil),                  // 1: message.Init
@@ -912,27 +722,21 @@ var file_message_proto_goTypes = []interface{}{
 	(*DepositSignature)(nil),      // 4: message.DepositSignature
 	(*WithdrawSignature)(nil),     // 5: message.WithdrawSignature
 	(*Withdraw)(nil),              // 6: message.Withdraw
-	(*Withdraws)(nil),             // 7: message.Withdraws
-	(*Group)(nil),                 // 8: message.Group
-	(*Groups)(nil),                // 9: message.Groups
-	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
 }
 var file_message_proto_depIdxs = []int32{
-	10, // 0: message.Operation.timestamp:type_name -> google.protobuf.Timestamp
-	1,  // 1: message.Operation.init:type_name -> message.Init
-	2,  // 2: message.Operation.heartbeat:type_name -> message.Heartbeat
-	3,  // 3: message.Operation.withdrawRequest:type_name -> message.WithdrawRequest
-	4,  // 4: message.Operation.depositSignature:type_name -> message.DepositSignature
-	5,  // 5: message.Operation.withdrawSignature:type_name -> message.WithdrawSignature
-	10, // 6: message.Withdraw.createdAt:type_name -> google.protobuf.Timestamp
-	6,  // 7: message.Withdraws.data:type_name -> message.Withdraw
-	10, // 8: message.Group.createdAt:type_name -> google.protobuf.Timestamp
-	8,  // 9: message.Groups.data:type_name -> message.Group
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	7, // 0: message.Operation.timestamp:type_name -> google.protobuf.Timestamp
+	1, // 1: message.Operation.init:type_name -> message.Init
+	2, // 2: message.Operation.heartbeat:type_name -> message.Heartbeat
+	3, // 3: message.Operation.withdrawRequest:type_name -> message.WithdrawRequest
+	4, // 4: message.Operation.depositSignature:type_name -> message.DepositSignature
+	5, // 5: message.Operation.withdrawSignature:type_name -> message.WithdrawSignature
+	7, // 6: message.Withdraw.createdAt:type_name -> google.protobuf.Timestamp
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
@@ -1025,42 +829,6 @@ func file_message_proto_init() {
 				return nil
 			}
 		}
-		file_message_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Withdraws); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_message_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Group); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_message_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Groups); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	file_message_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*Operation_Init)(nil),
@@ -1075,7 +843,7 @@ func file_message_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

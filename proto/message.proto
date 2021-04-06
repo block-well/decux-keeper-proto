@@ -63,19 +63,3 @@ message Withdraw {
   google.protobuf.Timestamp createdAt = 8;
   bytes applyHash = 9;
 }
-
-message Withdraws {
-  repeated Withdraw data = 1;
-}
-
-message Group {
-  int32 id = 1;
-  string address = 2;
-  string redeemScript = 3;
-  repeated int32 keepers = 4;
-  google.protobuf.Timestamp createdAt = 5;
-}
-
-message Groups {
-  repeated Group data = 1;
-}
