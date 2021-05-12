@@ -31,30 +31,28 @@ message Heartbeat {
 }
 
 message WithdrawRequest {
-  int32 groupId = 1;
-  int32 receiptId = 2;
+  string receiptId = 1;
+  string groupId = 2;
   string recipient = 3;
   uint64 amount = 4;
 }
 
 message DepositSignature {
-  int32 receiptId = 1;
-  int32 groupId = 2;
-  string recipient = 3;
-  uint64 amount = 4;
-  string txId = 5;
-  int32 blockHeight = 6;
-  bytes signature = 7;
+  string receiptId = 1;
+  string groupId = 2;
+  string txId = 3;
+  uint64 blockHeight = 4;
+  bytes signature = 5;
 }
 
 message WithdrawSignature {
-  int32 receiptId = 1;
+  string receiptId = 1;
   bytes signature = 2;
 }
 
 message Withdraw {
-  int32 receiptId = 1;
-  int32 groupId = 2;
+  string receiptId = 1;
+  string groupId = 2;
   string recipient = 3;
   uint64 amount = 4;
   string status = 5;
