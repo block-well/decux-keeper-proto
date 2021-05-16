@@ -1,7 +1,6 @@
 syntax = "proto3";
 package message;
 
-import "google/protobuf/timestamp.proto";
 option go_package = "golang/message";
 
 
@@ -9,8 +8,6 @@ message Operation {
   string keeperId = 1;
   uint64 nonce = 2;
   bytes signature = 3;
-
-  google.protobuf.Timestamp timestamp = 9;
 
   oneof operation {
     Init init = 10;
@@ -58,6 +55,4 @@ message Withdraw {
   string status = 5;
   string redeemScript = 6;
   string paymentRaw = 7;
-  google.protobuf.Timestamp createdAt = 8;
-  bytes applyHash = 9;
 }
