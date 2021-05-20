@@ -29,9 +29,6 @@ message Heartbeat {
 
 message WithdrawRequest {
   string receiptId = 1;
-  string groupId = 2;
-  string recipient = 3;
-  uint64 amount = 4;
 }
 
 message DepositSignature {
@@ -44,15 +41,10 @@ message DepositSignature {
 
 message WithdrawSignature {
   string receiptId = 1;
-  bytes signature = 2;
+  string psbt = 2;
 }
 
 message Withdraw {
   string receiptId = 1;
-  string groupId = 2;
-  string recipient = 3;
-  uint64 amount = 4;
-  string status = 5;
-  string redeemScript = 6;
-  string paymentRaw = 7;
+  string psbt = 2;
 }
