@@ -12,9 +12,11 @@ message Operation {
   oneof operation {
     Init init = 10;
     Heartbeat heartbeat = 11;
-    WithdrawRequest withdrawRequest = 12;
-    DepositSignature depositSignature = 13;
+    DepositSignature depositSignature = 12;
+    WithdrawRequest withdrawRequest = 13;
     WithdrawSignature withdrawSignature = 14;
+    RefundRequest refundRequest = 15;
+    RefundSignature refundSignature = 16;
   }
 }
 
@@ -27,16 +29,19 @@ message Heartbeat {
   bytes payload = 1;
 }
 
+message DepositSignature {
+  string receiptId = 1;
+  string txId = 2;
+  uint64 blockHeight = 3;
+  bytes signature = 4;
+}
+
 message WithdrawRequest {
   string receiptId = 1;
 }
 
-message DepositSignature {
-  string receiptId = 1;
-  string groupId = 2;
-  string txId = 3;
-  uint64 blockHeight = 4;
-  bytes signature = 5;
+message Withdraw {
+  string psbt = 1;
 }
 
 message WithdrawSignature {
@@ -44,7 +49,15 @@ message WithdrawSignature {
   string psbt = 2;
 }
 
-message Withdraw {
-  string receiptId = 1;
+message RefundRequest {
+  string txId = 1;
+}
+
+message Refund {
+  string psbt = 1;
+}
+
+message RefundSignature {
+  string txId = 1;
   string psbt = 2;
 }
