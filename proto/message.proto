@@ -23,7 +23,10 @@ message Operation {
 }
 
 message Heartbeat {
-  bytes btcPubKey = 1;
+  string decusSystem = 1;
+  bytes btcPubKey = 2;
+  string email = 3;
+  optional uint64 groupNum = 4;
 }
 
 message DepositSignature {
