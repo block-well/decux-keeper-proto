@@ -224,10 +224,11 @@ type Heartbeat struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DecusSystem string  `protobuf:"bytes,1,opt,name=decusSystem,proto3" json:"decusSystem,omitempty"`
+	ClientInfo  string  `protobuf:"bytes,1,opt,name=clientInfo,proto3" json:"clientInfo,omitempty"`
 	BtcPubKey   []byte  `protobuf:"bytes,2,opt,name=btcPubKey,proto3" json:"btcPubKey,omitempty"`
 	Email       string  `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	GroupNum    *uint64 `protobuf:"varint,4,opt,name=groupNum,proto3,oneof" json:"groupNum,omitempty"`
+	SyncMinutes *uint64 `protobuf:"varint,5,opt,name=syncMinutes,proto3,oneof" json:"syncMinutes,omitempty"`
 }
 
 func (x *Heartbeat) Reset() {
@@ -262,9 +263,9 @@ func (*Heartbeat) Descriptor() ([]byte, []int) {
 	return file_message_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Heartbeat) GetDecusSystem() string {
+func (x *Heartbeat) GetClientInfo() string {
 	if x != nil {
-		return x.DecusSystem
+		return x.ClientInfo
 	}
 	return ""
 }
@@ -290,6 +291,68 @@ func (x *Heartbeat) GetGroupNum() uint64 {
 	return 0
 }
 
+func (x *Heartbeat) GetSyncMinutes() uint64 {
+	if x != nil && x.SyncMinutes != nil {
+		return *x.SyncMinutes
+	}
+	return 0
+}
+
+type OnlineProof struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Timestamp uint64 `protobuf:"varint,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Signature string `protobuf:"bytes,2,opt,name=signature,proto3" json:"signature,omitempty"`
+}
+
+func (x *OnlineProof) Reset() {
+	*x = OnlineProof{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OnlineProof) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OnlineProof) ProtoMessage() {}
+
+func (x *OnlineProof) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OnlineProof.ProtoReflect.Descriptor instead.
+func (*OnlineProof) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *OnlineProof) GetTimestamp() uint64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *OnlineProof) GetSignature() string {
+	if x != nil {
+		return x.Signature
+	}
+	return ""
+}
+
 type DepositSignature struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -304,7 +367,7 @@ type DepositSignature struct {
 func (x *DepositSignature) Reset() {
 	*x = DepositSignature{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[3]
+		mi := &file_message_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -317,7 +380,7 @@ func (x *DepositSignature) String() string {
 func (*DepositSignature) ProtoMessage() {}
 
 func (x *DepositSignature) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[3]
+	mi := &file_message_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +393,7 @@ func (x *DepositSignature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DepositSignature.ProtoReflect.Descriptor instead.
 func (*DepositSignature) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{3}
+	return file_message_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DepositSignature) GetReceiptId() string {
@@ -372,7 +435,7 @@ type WithdrawRequest struct {
 func (x *WithdrawRequest) Reset() {
 	*x = WithdrawRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[4]
+		mi := &file_message_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -385,7 +448,7 @@ func (x *WithdrawRequest) String() string {
 func (*WithdrawRequest) ProtoMessage() {}
 
 func (x *WithdrawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[4]
+	mi := &file_message_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -398,7 +461,7 @@ func (x *WithdrawRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WithdrawRequest.ProtoReflect.Descriptor instead.
 func (*WithdrawRequest) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{4}
+	return file_message_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *WithdrawRequest) GetReceiptId() string {
@@ -419,7 +482,7 @@ type Withdraw struct {
 func (x *Withdraw) Reset() {
 	*x = Withdraw{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[5]
+		mi := &file_message_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -432,7 +495,7 @@ func (x *Withdraw) String() string {
 func (*Withdraw) ProtoMessage() {}
 
 func (x *Withdraw) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[5]
+	mi := &file_message_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -445,7 +508,7 @@ func (x *Withdraw) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Withdraw.ProtoReflect.Descriptor instead.
 func (*Withdraw) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{5}
+	return file_message_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Withdraw) GetPsbt() string {
@@ -467,7 +530,7 @@ type WithdrawSignature struct {
 func (x *WithdrawSignature) Reset() {
 	*x = WithdrawSignature{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[6]
+		mi := &file_message_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -480,7 +543,7 @@ func (x *WithdrawSignature) String() string {
 func (*WithdrawSignature) ProtoMessage() {}
 
 func (x *WithdrawSignature) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[6]
+	mi := &file_message_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -493,7 +556,7 @@ func (x *WithdrawSignature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WithdrawSignature.ProtoReflect.Descriptor instead.
 func (*WithdrawSignature) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{6}
+	return file_message_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *WithdrawSignature) GetReceiptId() string {
@@ -521,7 +584,7 @@ type RefundRequest struct {
 func (x *RefundRequest) Reset() {
 	*x = RefundRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[7]
+		mi := &file_message_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -534,7 +597,7 @@ func (x *RefundRequest) String() string {
 func (*RefundRequest) ProtoMessage() {}
 
 func (x *RefundRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[7]
+	mi := &file_message_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -547,7 +610,7 @@ func (x *RefundRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefundRequest.ProtoReflect.Descriptor instead.
 func (*RefundRequest) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{7}
+	return file_message_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *RefundRequest) GetTxId() string {
@@ -568,7 +631,7 @@ type Refund struct {
 func (x *Refund) Reset() {
 	*x = Refund{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[8]
+		mi := &file_message_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -581,7 +644,7 @@ func (x *Refund) String() string {
 func (*Refund) ProtoMessage() {}
 
 func (x *Refund) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[8]
+	mi := &file_message_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -594,7 +657,7 @@ func (x *Refund) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Refund.ProtoReflect.Descriptor instead.
 func (*Refund) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{8}
+	return file_message_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Refund) GetPsbt() string {
@@ -616,7 +679,7 @@ type RefundSignature struct {
 func (x *RefundSignature) Reset() {
 	*x = RefundSignature{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[9]
+		mi := &file_message_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -629,7 +692,7 @@ func (x *RefundSignature) String() string {
 func (*RefundSignature) ProtoMessage() {}
 
 func (x *RefundSignature) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[9]
+	mi := &file_message_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -642,7 +705,7 @@ func (x *RefundSignature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefundSignature.ProtoReflect.Descriptor instead.
 func (*RefundSignature) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{9}
+	return file_message_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RefundSignature) GetTxId() string {
@@ -696,16 +759,24 @@ var file_message_proto_rawDesc = []byte{
 	0x65, 0x2e, 0x52, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72,
 	0x65, 0x48, 0x00, 0x52, 0x0f, 0x72, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x53, 0x69, 0x67, 0x6e, 0x61,
 	0x74, 0x75, 0x72, 0x65, 0x42, 0x0b, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x22, 0x8f, 0x01, 0x0a, 0x09, 0x48, 0x65, 0x61, 0x72, 0x74, 0x62, 0x65, 0x61, 0x74, 0x12,
-	0x20, 0x0a, 0x0b, 0x64, 0x65, 0x63, 0x75, 0x73, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x63, 0x75, 0x73, 0x53, 0x79, 0x73, 0x74, 0x65,
-	0x6d, 0x12, 0x1c, 0x0a, 0x09, 0x62, 0x74, 0x63, 0x50, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x0c, 0x52, 0x09, 0x62, 0x74, 0x63, 0x50, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x12,
-	0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
-	0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x1f, 0x0a, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x75,
-	0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x48, 0x00, 0x52, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70,
-	0x4e, 0x75, 0x6d, 0x88, 0x01, 0x01, 0x42, 0x0b, 0x0a, 0x09, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70,
-	0x4e, 0x75, 0x6d, 0x22, 0x84, 0x01, 0x0a, 0x10, 0x44, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x53,
+	0x6e, 0x22, 0xc4, 0x01, 0x0a, 0x09, 0x48, 0x65, 0x61, 0x72, 0x74, 0x62, 0x65, 0x61, 0x74, 0x12,
+	0x1e, 0x0a, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x12,
+	0x1c, 0x0a, 0x09, 0x62, 0x74, 0x63, 0x50, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0c, 0x52, 0x09, 0x62, 0x74, 0x63, 0x50, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x12, 0x14, 0x0a,
+	0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d,
+	0x61, 0x69, 0x6c, 0x12, 0x1f, 0x0a, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x75, 0x6d, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x04, 0x48, 0x00, 0x52, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x75,
+	0x6d, 0x88, 0x01, 0x01, 0x12, 0x25, 0x0a, 0x0b, 0x73, 0x79, 0x6e, 0x63, 0x4d, 0x69, 0x6e, 0x75,
+	0x74, 0x65, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x48, 0x01, 0x52, 0x0b, 0x73, 0x79, 0x6e,
+	0x63, 0x4d, 0x69, 0x6e, 0x75, 0x74, 0x65, 0x73, 0x88, 0x01, 0x01, 0x42, 0x0b, 0x0a, 0x09, 0x5f,
+	0x67, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x75, 0x6d, 0x42, 0x0e, 0x0a, 0x0c, 0x5f, 0x73, 0x79, 0x6e,
+	0x63, 0x4d, 0x69, 0x6e, 0x75, 0x74, 0x65, 0x73, 0x22, 0x49, 0x0a, 0x0b, 0x4f, 0x6e, 0x6c, 0x69,
+	0x6e, 0x65, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73,
+	0x74, 0x61, 0x6d, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65,
+	0x73, 0x74, 0x61, 0x6d, 0x70, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75,
+	0x72, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74,
+	0x75, 0x72, 0x65, 0x22, 0x84, 0x01, 0x0a, 0x10, 0x44, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x53,
 	0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x63, 0x65,
 	0x69, 0x70, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x63,
 	0x65, 0x69, 0x70, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x78, 0x49, 0x64, 0x18, 0x02,
@@ -747,31 +818,32 @@ func file_message_proto_rawDescGZIP() []byte {
 	return file_message_proto_rawDescData
 }
 
-var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_message_proto_goTypes = []interface{}{
 	(*Request)(nil),           // 0: message.Request
 	(*Operation)(nil),         // 1: message.Operation
 	(*Heartbeat)(nil),         // 2: message.Heartbeat
-	(*DepositSignature)(nil),  // 3: message.DepositSignature
-	(*WithdrawRequest)(nil),   // 4: message.WithdrawRequest
-	(*Withdraw)(nil),          // 5: message.Withdraw
-	(*WithdrawSignature)(nil), // 6: message.WithdrawSignature
-	(*RefundRequest)(nil),     // 7: message.RefundRequest
-	(*Refund)(nil),            // 8: message.Refund
-	(*RefundSignature)(nil),   // 9: message.RefundSignature
+	(*OnlineProof)(nil),       // 3: message.OnlineProof
+	(*DepositSignature)(nil),  // 4: message.DepositSignature
+	(*WithdrawRequest)(nil),   // 5: message.WithdrawRequest
+	(*Withdraw)(nil),          // 6: message.Withdraw
+	(*WithdrawSignature)(nil), // 7: message.WithdrawSignature
+	(*RefundRequest)(nil),     // 8: message.RefundRequest
+	(*Refund)(nil),            // 9: message.Refund
+	(*RefundSignature)(nil),   // 10: message.RefundSignature
 }
 var file_message_proto_depIdxs = []int32{
-	2, // 0: message.Operation.heartbeat:type_name -> message.Heartbeat
-	3, // 1: message.Operation.depositSignature:type_name -> message.DepositSignature
-	4, // 2: message.Operation.withdrawRequest:type_name -> message.WithdrawRequest
-	6, // 3: message.Operation.withdrawSignature:type_name -> message.WithdrawSignature
-	7, // 4: message.Operation.refundRequest:type_name -> message.RefundRequest
-	9, // 5: message.Operation.refundSignature:type_name -> message.RefundSignature
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	2,  // 0: message.Operation.heartbeat:type_name -> message.Heartbeat
+	4,  // 1: message.Operation.depositSignature:type_name -> message.DepositSignature
+	5,  // 2: message.Operation.withdrawRequest:type_name -> message.WithdrawRequest
+	7,  // 3: message.Operation.withdrawSignature:type_name -> message.WithdrawSignature
+	8,  // 4: message.Operation.refundRequest:type_name -> message.RefundRequest
+	10, // 5: message.Operation.refundSignature:type_name -> message.RefundSignature
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
@@ -817,7 +889,7 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DepositSignature); i {
+			switch v := v.(*OnlineProof); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -829,7 +901,7 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WithdrawRequest); i {
+			switch v := v.(*DepositSignature); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -841,7 +913,7 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Withdraw); i {
+			switch v := v.(*WithdrawRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -853,7 +925,7 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WithdrawSignature); i {
+			switch v := v.(*Withdraw); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -865,7 +937,7 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RefundRequest); i {
+			switch v := v.(*WithdrawSignature); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -877,7 +949,7 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Refund); i {
+			switch v := v.(*RefundRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -889,6 +961,18 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Refund); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RefundSignature); i {
 			case 0:
 				return &v.state
@@ -916,7 +1000,7 @@ func file_message_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
