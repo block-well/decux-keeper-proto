@@ -1,4 +1,4 @@
-# decus-keeper-proto
+# decux-keeper-proto
 
 ## Generate golang code
 
