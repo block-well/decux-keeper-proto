@@ -1,4 +1,4 @@
-module github.com/decus-io/decus-keeper-proto
+module github.com/decux-io/decux-keeper-proto
 
 go 1.16
 
