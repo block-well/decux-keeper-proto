@@ -1,5 +1,5 @@
-module github.com/decux-io/decux-keeper-proto
+module github.com/block-well/decux-keeper-proto
 
-go 1.20
+go 1.16
 
 require google.golang.org/protobuf v1.30.0
