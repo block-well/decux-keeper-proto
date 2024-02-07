@@ -1,65 +1,69 @@
 syntax = "proto3";
 package message;
 
-import "google/protobuf/timestamp.proto";
 option go_package = "golang/message";
 
 
+message Request {
+  bytes data = 1;
+  bytes signature = 2;
+}
+
 message Operation {
   string keeperId = 1;
-  uint64 nonce = 2;
-  bytes signature = 3;
-
-  google.protobuf.Timestamp timestamp = 9;
 
   oneof operation {
-    Init init = 10;
     Heartbeat heartbeat = 11;
-    WithdrawRequest withdrawRequest = 12;
-    DepositSignature depositSignature = 13;
+    DepositSignature depositSignature = 12;
+    WithdrawRequest withdrawRequest = 13;
     WithdrawSignature withdrawSignature = 14;
+    RefundRequest refundRequest = 15;
+    RefundSignature refundSignature = 16;
   }
 }
 
-message Init {
-  bytes btcPubKey = 1;
-  bytes signature = 2;
-}
-
 message Heartbeat {
-  bytes payload = 1;
+  string clientInfo = 1;
+  bytes btcPubKey = 2;
+  string email = 3;
+  optional uint64 groupNum = 4;
+  optional uint64 syncMinutes = 5;
 }
 
-message WithdrawRequest {
-  int32 groupId = 1;
-  int32 receiptId = 2;
-  string recipient = 3;
-  uint64 amount = 4;
+message OnlineProof {
+  uint64 timestamp = 1;
+  string signature = 2;
 }
 
 message DepositSignature {
-  int32 receiptId = 1;
-  int32 groupId = 2;
-  string recipient = 3;
-  uint64 amount = 4;
-  string txId = 5;
-  int32 blockHeight = 6;
-  bytes signature = 7;
+  string receiptId = 1;
+  string txId = 2;
+  uint64 blockHeight = 3;
+  bytes signature = 4;
 }
 
-message WithdrawSignature {
-  int32 receiptId = 1;
-  bytes signature = 2;
+message WithdrawRequest {
+  string receiptId = 1;
 }
 
 message Withdraw {
-  int32 receiptId = 1;
-  int32 groupId = 2;
-  string recipient = 3;
-  uint64 amount = 4;
-  string status = 5;
-  string redeemScript = 6;
-  string paymentRaw = 7;
-  google.protobuf.Timestamp createdAt = 8;
-  bytes applyHash = 9;
+  string psbt = 1;
+}
+
+message WithdrawSignature {
+  string receiptId = 1;
+  string psbt = 2;
+}
+
+message RefundRequest {
+  string txId = 1;
+}
+
+message Refund {
+  string psbt = 1;
+}
+
+message RefundSignature {
+  string txId = 1;
+  string psbt = 2;
 }
